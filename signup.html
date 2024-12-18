@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - learnoHub</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #2d3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .container h2 {
+            text-align: center;
+            color: #4C6E91;
+        }
+        label {
+            font-size: 1.1em;
+            margin-bottom: 5px;
+            display: block;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .error {
+            color: #f25c5c;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .button {
+            background-color: #f25c5c;
+            color: white;
+            padding: 15px 25px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .button:hover {
+            background-color: #e04d4d;
+        }
+        footer {
+            background-color: #2d3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Sign Up to learnoHub</h1>
+    <p>Join our community and start learning today!</p>
+</header>
+
+<div class="container">
+    <h2>Create an Account</h2>
+    <form id="signupForm" onsubmit="return validateForm()">
+        <label for="name">Full Name :</label>
+        <input type="text" id="name" name="name" placeholder="Enter your full name">
+        <div class="error" id="nameError"></div>
+        
+        <label for="email">Email :</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email">
+        <div class="error" id="emailError"></div>
+        
+        <label for="password">Password :</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password">
+        <div class="error" id="passwordError"></div>
+        
+        <label for="age">Age :</label>
+        <input type="number" id="age" name="age" placeholder="Enter your age">
+        <div class="error" id="ageError"></div>
+        
+        <label for="qualification">Qualification :</label>
+        <select id="qualification" name="qualification">
+            <option value="">Select your qualification</option>
+            <option value="High School">High School</option>
+            <option value="Undergraduate">Undergraduate</option>
+            <option value="Graduate">Graduate</option>
+            <option value="Postgraduate">Postgraduate</option>
+        </select>
+        <div class="error" id="qualificationError"></div>
+        
+        <button type="submit" class="button">Sign Up</button>
+    </form>
+    <br>
+    <a href="index.html" class="button">Back to Home</a>
+</div>
+
+<footer>
+    <p>&copy; 2024 learnoHub. All rights reserved.</p>
+</footer>
+
+<script>
+    function validateForm() {
+        // Clear previous error messages
+        clearErrors();
+
+        let isValid = true;
+
+        // Validate Name
+        const name = document.getElementById("name").value;
+        if (name.trim() === "") {
+            isValid = false;
+            document.getElementById("nameError").textContent = "Name is required.";
+        }
+
+        // Validate Email
+        const email = document.getElementById("email").value;
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        if (email.trim() === "") {
+            isValid = false;
+            document.getElementById("emailError").textContent = "Email is required.";
+        } else if (!emailPattern.test(email)) {
+            isValid = false;
+            document.getElementById("emailError").textContent = "Please enter a valid email address.";
+        }
+
+        // Validate Password
+        const password = document.getElementById("password").value;
+        if (password.trim() === "") {
+            isValid = false;
+            document.getElementById("passwordError").textContent = "Password is required.";
+        } else if (password.length < 8) {
+            isValid = false;
+            document.getElementById("passwordError").textContent = "Password must be at least 8 characters.";
+        } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+            isValid = false;
+            document.getElementById("passwordError").textContent = "Password must contain at least one special character.";
+        }
+
+        // Validate Age
+        const age = document.getElementById("age").value;
+        if (age.trim() === "") {
+            isValid = false;
+            document.getElementById("ageError").textContent = "Age is required.";
+        } else if (isNaN(age) || age <= 0) {
+            isValid = false;
+            document.getElementById("ageError").textContent = "Please enter a valid age.";
+        }
+
+        // Validate Qualification
+        const qualification = document.getElementById("qualification").value;
+        if (qualification === "") {
+            isValid = false;
+            document.getElementById("qualificationError").textContent = "Qualification is required.";
+        }
+
+        return isValid;
+    }
+
+    function clearErrors() {
+        document.getElementById("nameError").textContent = "";
+        document.getElementById("emailError").textContent = "";
+        document.getElementById("passwordError").textContent = "";
+        document.getElementById("ageError").textContent = "";
+        document.getElementById("qualificationError").textContent = "";
+    }
+</script>
+
+</body>
+</html>
+
+
+
